@@ -16,16 +16,10 @@ Fait le 16 août :
   avec le code). Règles D39/D30/D19/D06 dans `lib/regles.ts` (emplacement unique), 7 tests verts,
   build vérifié. `/api/health` + écran « vide mais parlant ».
 
-## Prochaine étape — le premier déploiement (checklist Manu, ~10 min)
-1. **Supabase** → projet « Flex Up APPS » → Settings → API → **Exposed schemas : ajouter `cockpit`**.
-   Sans ça, l'app ne peut pas lire la base — /api/health le dira noir sur blanc.
-2. Terminal : `cd "~/FLEX UP Dropbox/CLAUDE/COCKPIT/APP-TACHES" && bash deploy-app-taches.sh`
-   (propose `vercel login` au premier passage ; crée le projet `app-taches`).
-3. **Vercel** → projet app-taches → Settings → Environment Variables :
-   `NEXT_PUBLIC_SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (mêmes valeurs que Cash Today,
-   même projet Supabase) → relancer le script.
-4. GitHub (backup) : créer `Flexupworld/app-taches`, puis
-   `git remote add origin https://github.com/Flexupworld/app-taches.git && git push -u origin main`.
+## Prochaine étape — le premier déploiement (Manu, ~10 min)
+**Checklist complète : `../DEPLOIEMENT.md`** (à la racine du projet — écrit pour la session
+maison, à supprimer une fois F0 en ligne). En résumé : exposer `cockpit` dans l'API Supabase →
+`bash deploy-app-taches.sh` → variables d'environnement sur Vercel → relancer → GitHub.
 **Fini quand** `/api/health` répond `schema_cockpit: OK` en ligne → alors CHANGELOG + écran F1.
 
 Ensuite : **l'écran F1 v2 « Ma journée »** — trois rails à slots fermes (D39), réservoir
