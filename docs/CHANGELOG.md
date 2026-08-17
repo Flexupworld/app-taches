@@ -3,6 +3,13 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Ordre des cartes : ⇈ en tête · ↑ passer devant (v0.6)
+Demandé par Manu. Fidèle à D28 : ordinal, pas de note — on fait passer une tâche
+devant une autre. Renumérotation unique des rangs de seed (doublons corrigés) ;
+helper `renumeroter()` unique côté serveur (ARCHITECTURE : reorder). Le menu
+déroulant est écarté (lourd) ; le glisser-déposer reste au backlog (B-05) —
+à industrialiser seulement si ⇈/↑ ne suffisent pas à l'usage.
+
 ## 17 août 2026 — Correctif : dictées invisibles à l'écran (v0.5)
 Bug trouvé par Manu à l'usage : une tâche dictée (« onboarding flow Flex Up EU »)
 était en base mais invisible — réservoir ET recherche. Cause : le Data Cache de

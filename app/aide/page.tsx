@@ -90,6 +90,9 @@ export default function Aide() {
         commercial en tête. Chaque carte porte les trois tags de rail côte à côte :
         l&apos;actif est en couleur, un « ? » signale une proposition de Claude pas
         encore confirmée — clique directement le tag que tu veux pour basculer.
+        L&apos;ordre : <strong>⇈</strong> met la tâche en tête de sa colonne,
+        <strong> ↑</strong> la fait passer devant la précédente. Pas de note, pas de
+        score — tu fais passer une tâche devant une autre, rien d&apos;autre.
         « ★ » marque un chantier actif.
       </p>
 

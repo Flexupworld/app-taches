@@ -7,6 +7,7 @@ import {
   mettreAujourdhui, refuserProposition, marquerFait, ajouterSession,
   cloturerChantier, reporterAuReservoir, sortirDesMains, demander,
   cloreDelegation, resoudreBlocage, changerRailVers,
+  monterDunCran, mettreEnTete,
 } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -370,6 +371,12 @@ export default async function Page({
                   <div style={S.rangee}>
                     <form action={mettreAujourdhui.bind(null, t.id, false)}>
                       <button style={S.boutonVert}>Aujourd&apos;hui</button>
+                    </form>
+                    <form action={mettreEnTete.bind(null, t.id)}>
+                      <button style={S.bouton} title="Passer en tête de la colonne">⇈</button>
+                    </form>
+                    <form action={monterDunCran.bind(null, t.id)}>
+                      <button style={S.bouton} title="Passer devant la précédente">↑</button>
                     </form>
                     <ChipRail t={t} />
                     <ChoixPersonne taskId={t.id} personnes={d.personnes} />

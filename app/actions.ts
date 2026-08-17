@@ -170,6 +170,69 @@ export async function resoudreBlocage(blocageId: string) {
   revalidatePath("/");
 }
 
+// ─── Ordre dans la colonne (D28 : ordinal — passer devant, pas noter) ────────
+
+/** Helper unique de renumérotation d'une colonne (ARCHITECTURE : reorder). */
+async function renumeroter(categorie: string, plan: string) {
+  const sb = cockpitClient();
+  const { data, error } = await sb
+    .from("task")
+    .select("id, rang, created_at")
+    .eq("categorie", categorie)
+    .eq("plan", plan)
+    .eq("porteur", "moi")
+    .not("status", "in", '("fait","abandonne")')
+    .order("rang", { ascending: true, nullsFirst: false })
+    .order("created_at", { ascending: true });
+  if (error) throw new Error(error.message);
+  const lignes = data ?? [];
+  for (let i = 0; i < lignes.length; i++) {
+    if (lignes[i].rang !== i + 1) {
+      const { error: e } = await sb
+        .from("task")
+        .update({ rang: i + 1 })
+        .eq("id", lignes[i].id);
+      if (e) throw new Error(e.message);
+    }
+  }
+  return lignes.map((l) => l.id);
+}
+
+/** « ↑ » — la tâche passe devant celle qui la précède (D28). */
+export async function monterDunCran(taskId: string) {
+  const sb = cockpitClient();
+  const { data: t, error } = await sb
+    .from("task")
+    .select("categorie, plan")
+    .eq("id", taskId)
+    .single();
+  if (error) throw new Error(error.message);
+  const ordre = await renumeroter(t.categorie, t.plan);
+  const i = ordre.indexOf(taskId);
+  if (i > 0) {
+    const { error: e1 } = await sb.from("task").update({ rang: i }).eq("id", taskId);
+    if (e1) throw new Error(e1.message);
+    const { error: e2 } = await sb.from("task").update({ rang: i + 1 }).eq("id", ordre[i - 1]);
+    if (e2) throw new Error(e2.message);
+  }
+  revalidatePath("/");
+}
+
+/** « ⇈ » — la tâche passe en tête de sa colonne (D28). */
+export async function mettreEnTete(taskId: string) {
+  const sb = cockpitClient();
+  const { data: t, error } = await sb
+    .from("task")
+    .select("categorie, plan")
+    .eq("id", taskId)
+    .single();
+  if (error) throw new Error(error.message);
+  const { error: e1 } = await sb.from("task").update({ rang: 0 }).eq("id", taskId);
+  if (e1) throw new Error(e1.message);
+  await renumeroter(t.categorie, t.plan);
+  revalidatePath("/");
+}
+
 /** Corriger le rail (D22/D29 : Manu corrige d'un geste — choix direct du tag). */
 export async function changerRailVers(taskId: string, rail: Rail) {
   if (!RAILS.includes(rail)) throw new Error(`Rail inconnu : ${rail}`);
