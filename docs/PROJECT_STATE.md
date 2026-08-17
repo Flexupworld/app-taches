@@ -24,9 +24,8 @@ CHANGELOG + DECISIONS à jour · commité **et poussé**.
 au moins une proposition sur cinq. Sinon on s'arrête et on regarde pourquoi.
 
 ## Reste à faire (hors F1)
-- **Push GitHub** : créer `Flexupworld/app-taches` (privé, vide) puis
-  `git remote add origin … && git push -u origin main`. Le script pousse ensuite à chaque
-  déploiement. Tant que ce n'est pas fait, le « et poussé » de la méthode n'est pas honoré.
+- Rien. GitHub : `Flexupworld/app-taches` créé et poussé le 17 août (token dans le
+  trousseau de l'iMac). Le script de déploiement pousse à chaque passage.
 
 ## Arbitrages restant à Manu
 - **7 internes manquants** (9 seedés : Manu · Wijnand · Nathan · Edith · Manuel Wing ·
