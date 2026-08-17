@@ -324,3 +324,26 @@ _Raison : tester le cycle sur une donnée vraie plutôt que sur un jeu fictif. C
 méthode §3 (tests de référence : un cas connu, résultat attendu écrit en dur)._
 ⚠️ _Périmètre exact du « résolu » à préciser avant de réécrire le bloc Caixa de COCKPIT.md
 — ne pas consigner un état vague._
+
+---
+## Étape 3 — Construction : F0 livré le 17 août 2026
+
+**D41 — Le dépôt git vit à la racine d'APP-TACHES, docs et schéma inclus.**
+_(16 août 2026, Claude — construction F0)_
+Un seul dossier = une seule application : `docs/`, `db/` et le code Next.js dans le même
+repo, contrairement à Cash Today (repo `cash-today/` séparé, docs dedans).
+_Raison : méthode §3 — le harnais et les documents vivent dans le dépôt, versionnés. Les
+docs préexistaient à la racine ; les déplacer aurait cassé les références de COCKPIT.md._
+
+**D42 — Accès base : Data API avec schéma `cockpit` exposé, service_role uniquement.**
+_(17 août 2026, Claude, constaté avec Manu)_
+`cockpit` ajouté aux « Exposed schemas » du Data API ; grants au seul `service_role`
+(migration `cockpit_002`). `anon` et `authenticated` : aucun droit — vérifié en direct
+(42501 permission denied). L'app parle à la base exclusivement côté serveur.
+_Raison : D25 (mono-utilisateur) — aucune raison d'ouvrir la moindre lecture au navigateur._
+
+**D43 — Le domaine de production est `app-taches-rose.vercel.app`.**
+_(17 août 2026, constaté)_
+`app-taches.vercel.app` appartient à un tiers (« Ma Todo App ») — les sous-domaines
+vercel.app sont globaux. Script et docs pointent sur le domaine réel.
+_Raison : consigné pour ne pas re-vérifier un « faux 404 » à chaque session._
