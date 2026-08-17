@@ -172,16 +172,27 @@ export async function resoudreBlocage(blocageId: string) {
 
 // ─── Ordre dans la colonne (D28 : ordinal — passer devant, pas noter) ────────
 
+// La « colonne » d'une tâche : au réservoir on range par catégorie ; au jour,
+// par rail. Un seul endroit décide de ça.
+type Colonne = { plan: string; categorie?: string; rail?: string | null };
+function colonneDe(t: { plan: string; categorie: string; rail: string | null }): Colonne {
+  return t.plan === "aujourdhui"
+    ? { plan: t.plan, rail: t.rail }
+    : { plan: t.plan, categorie: t.categorie };
+}
+
 /** Helper unique de renumérotation d'une colonne (ARCHITECTURE : reorder). */
-async function renumeroter(categorie: string, plan: string) {
+async function renumeroter(c: Colonne) {
   const sb = cockpitClient();
-  const { data, error } = await sb
+  let req = sb
     .from("task")
     .select("id, rang, created_at")
-    .eq("categorie", categorie)
-    .eq("plan", plan)
+    .eq("plan", c.plan)
     .eq("porteur", "moi")
-    .not("status", "in", '("fait","abandonne")')
+    .not("status", "in", '("fait","abandonne")');
+  if (c.categorie) req = req.eq("categorie", c.categorie);
+  if (c.rail) req = req.eq("rail", c.rail);
+  const { data, error } = await req
     .order("rang", { ascending: true, nullsFirst: false })
     .order("created_at", { ascending: true });
   if (error) throw new Error(error.message);
@@ -198,16 +209,21 @@ async function renumeroter(categorie: string, plan: string) {
   return lignes.map((l) => l.id);
 }
 
-/** « ↑ » — la tâche passe devant celle qui la précède (D28). */
-export async function monterDunCran(taskId: string) {
+async function lireColonne(taskId: string): Promise<Colonne> {
   const sb = cockpitClient();
   const { data: t, error } = await sb
     .from("task")
-    .select("categorie, plan")
+    .select("categorie, plan, rail")
     .eq("id", taskId)
     .single();
   if (error) throw new Error(error.message);
-  const ordre = await renumeroter(t.categorie, t.plan);
+  return colonneDe(t);
+}
+
+/** « ↑ » — la tâche passe devant celle qui la précède (D28). */
+export async function monterDunCran(taskId: string) {
+  const sb = cockpitClient();
+  const ordre = await renumeroter(await lireColonne(taskId));
   const i = ordre.indexOf(taskId);
   if (i > 0) {
     const { error: e1 } = await sb.from("task").update({ rang: i }).eq("id", taskId);
@@ -221,26 +237,36 @@ export async function monterDunCran(taskId: string) {
 /** « ⇈ » — la tâche passe en tête de sa colonne (D28). */
 export async function mettreEnTete(taskId: string) {
   const sb = cockpitClient();
-  const { data: t, error } = await sb
-    .from("task")
-    .select("categorie, plan")
-    .eq("id", taskId)
-    .single();
-  if (error) throw new Error(error.message);
+  const colonne = await lireColonne(taskId);
   const { error: e1 } = await sb.from("task").update({ rang: 0 }).eq("id", taskId);
   if (e1) throw new Error(e1.message);
-  await renumeroter(t.categorie, t.plan);
+  await renumeroter(colonne);
   revalidatePath("/");
 }
 
-/** Corriger le rail (D22/D29 : Manu corrige d'un geste — choix direct du tag). */
+/** Corriger le rail (D22/D29 : Manu corrige d'un geste — choix direct du tag).
+ *  Sur une tâche DU JOUR, c'est un déplacement de slot : refusé si le rail
+ *  cible est plein (D39), Créer compris. */
 export async function changerRailVers(taskId: string, rail: Rail) {
   if (!RAILS.includes(rail)) throw new Error(`Rail inconnu : ${rail}`);
   const sb = cockpitClient();
-  const { error } = await sb
+  const { data: t, error } = await sb
+    .from("task")
+    .select("plan, rail")
+    .eq("id", taskId)
+    .single();
+  if (error) throw new Error(error.message);
+  if (t.rail === rail) return;
+
+  if (t.plan === "aujourdhui" && !peutAjouterAuJour(rail, await slotsOccupes(rail))) {
+    revalidatePath("/");
+    redirect(`/?refus=${rail}`);
+  }
+
+  const { error: e2 } = await sb
     .from("task")
     .update({ rail })
     .eq("id", taskId);
-  if (error) throw new Error(error.message);
+  if (e2) throw new Error(e2.message);
   revalidatePath("/");
 }

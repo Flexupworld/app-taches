@@ -264,7 +264,13 @@ export default async function Page({
                     <form action={reporterAuReservoir.bind(null, t.id)}>
                       <button style={S.bouton}>Reporter</button>
                     </form>
+                    <form action={monterDunCran.bind(null, t.id)}>
+                      <button style={S.bouton} title="Passer devant la précédente">↑</button>
+                    </form>
                     <ChoixPersonne taskId={t.id} personnes={d.personnes} />
+                  </div>
+                  <div style={S.rangee}>
+                    <ChipRail t={t} />
                   </div>
                 </div>
               ))}

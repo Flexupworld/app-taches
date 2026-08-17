@@ -74,6 +74,14 @@ export default function Aide() {
         le mécanisme qui te force à choisir.
       </div>
 
+      <h2 style={S.h2}>Réorganiser la journée</h2>
+      <p style={S.p}>
+        Sur chaque carte du jour : <strong>↑</strong> la fait passer devant la
+        précédente dans son rail, et les trois tags de rail permettent de la
+        basculer (Performer → Mécanique, etc.). Basculer vers un rail plein est
+        refusé, comme un ajout — Créer compris : la journée n&apos;est pas extensible.
+      </p>
+
       <h2 style={S.h2}>Les propositions — et pourquoi dire « Non » compte</h2>
       <p style={S.p}>
         Quand un slot est libre, l&apos;app te propose un candidat du réservoir.

@@ -3,6 +3,12 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — La journée se réorganise (v0.7)
+Sur les cartes du jour : ↑ (ordre dans le rail) et les trois tags de rail pour
+basculer Performer ↔ Mécanique ↔ Créer. **La bascule vers un rail plein est refusée
+comme un ajout (D39), Créer compris.** La « colonne » d'une tâche est désormais
+définie à un seul endroit : catégorie au réservoir, rail au jour.
+
 ## 17 août 2026 — Ordre des cartes : ⇈ en tête · ↑ passer devant (v0.6)
 Demandé par Manu. Fidèle à D28 : ordinal, pas de note — on fait passer une tâche
 devant une autre. Renumérotation unique des rangs de seed (doublons corrigés) ;
