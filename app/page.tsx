@@ -6,7 +6,7 @@ import { chargerEcran, rechercherTaches, joursDepuis, type Tache } from "@/lib/d
 import {
   mettreAujourdhui, refuserProposition, marquerFait, ajouterSession,
   cloturerChantier, reporterAuReservoir, sortirDesMains, demander,
-  cloreDelegation, resoudreBlocage, changerRail,
+  cloreDelegation, resoudreBlocage, changerRailVers,
 } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -56,22 +56,35 @@ const S = {
 };
 
 function ChipRail({ t }: { t: Tache }) {
-  const rail = (t.rail as Rail) ?? proposerRail(t.title);
+  // Les trois tags côte à côte : l'actif est plein, les autres estompés.
+  // Un clic bascule directement (D22 : corriger = un geste, pas un cycle).
+  const actif = (t.rail as Rail) ?? proposerRail(t.title);
   const propose = t.rail === null;
   return (
-    <form action={changerRail.bind(null, t.id)} style={{ display: "inline" }}>
-      <button
-        style={{
-          ...S.bouton,
-          color: COULEURS_RAIL[rail],
-          borderColor: COULEURS_RAIL[rail],
-          opacity: propose ? 0.7 : 1,
-        }}
-        title="Corriger le rail (D29 : Claude propose, tu corriges)"
-      >
-        {NOMS_RAIL[rail]}{propose ? " ?" : ""}
-      </button>
-    </form>
+    <span style={{ display: "inline-flex", gap: "0.25rem" }}>
+      {RAILS.map((r) => {
+        const estActif = r === actif;
+        return (
+          <form key={r} action={changerRailVers.bind(null, t.id, r)} style={{ display: "inline" }}>
+            <button
+              style={{
+                ...S.bouton,
+                color: estActif ? COULEURS_RAIL[r] : "#484f58",
+                borderColor: estActif ? COULEURS_RAIL[r] : "#30363d",
+                fontWeight: estActif ? 600 : 400,
+              }}
+              title={
+                estActif && propose
+                  ? "Proposé par Claude — clique un autre tag pour corriger"
+                  : `Basculer en ${NOMS_RAIL[r]}`
+              }
+            >
+              {NOMS_RAIL[r]}{estActif && propose ? " ?" : ""}
+            </button>
+          </form>
+        );
+      })}
+    </span>
   );
 }
 

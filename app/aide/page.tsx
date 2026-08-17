@@ -87,9 +87,10 @@ export default function Aide() {
       <h2 style={S.h2}>Le réservoir</h2>
       <p style={S.p}>
         Tout ce qui est à toi (<em>porteur = moi</em>), rangé par catégorie,
-        commercial en tête. La pastille de rail avec un « ? » est une proposition de
-        Claude — clique dessus pour la corriger (elle tourne : Créer → Performer →
-        Mécanique). « ★ » marque un chantier actif.
+        commercial en tête. Chaque carte porte les trois tags de rail côte à côte :
+        l&apos;actif est en couleur, un « ? » signale une proposition de Claude pas
+        encore confirmée — clique directement le tag que tu veux pour basculer.
+        « ★ » marque un chantier actif.
       </p>
 
       <h2 style={S.h2}>Sortir de mes mains</h2>

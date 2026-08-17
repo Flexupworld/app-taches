@@ -170,21 +170,14 @@ export async function resoudreBlocage(blocageId: string) {
   revalidatePath("/");
 }
 
-/** Corriger le rail proposé (D22/D29 : Manu corrige d'un geste). */
-export async function changerRail(taskId: string) {
+/** Corriger le rail (D22/D29 : Manu corrige d'un geste — choix direct du tag). */
+export async function changerRailVers(taskId: string, rail: Rail) {
+  if (!RAILS.includes(rail)) throw new Error(`Rail inconnu : ${rail}`);
   const sb = cockpitClient();
-  const { data: t, error } = await sb
+  const { error } = await sb
     .from("task")
-    .select("rail")
-    .eq("id", taskId)
-    .single();
-  if (error) throw new Error(error.message);
-  const actuel = (t.rail as Rail) ?? "performer";
-  const suivant = RAILS[(RAILS.indexOf(actuel) + 1) % RAILS.length];
-  const { error: e2 } = await sb
-    .from("task")
-    .update({ rail: suivant })
+    .update({ rail })
     .eq("id", taskId);
-  if (e2) throw new Error(e2.message);
+  if (error) throw new Error(error.message);
   revalidatePath("/");
 }

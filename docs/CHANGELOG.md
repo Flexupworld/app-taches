@@ -3,10 +3,12 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
-## 17 août 2026 — Manuel embarqué (v0.4)
+## 17 août 2026 — Manuel embarqué + sélecteur de rail (v0.4)
 Bouton « Manuel » en tête d'écran → `/aide`. Décrit la version en ligne : les trois
 rails, les slots fermes, les propositions et le taux de contestation, sortir de mes
 mains, je suis bloqué, la recherche, et la grammaire de dictée (D44).
+Sélecteur de rail sur les cartes du réservoir : les trois tags côte à côte, clic
+direct pour basculer (retour d'usage Manu le jour même — le cycle caché ne se voyait pas).
 **Règle d'entretien (méthode) : le manuel se met à jour dans le même mouvement que
 chaque livraison — s'il diverge de l'écran, c'est un bug.**
 
