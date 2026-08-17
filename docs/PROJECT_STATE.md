@@ -25,8 +25,9 @@ Ensuite seulement : F2 (miroir hebdo — il faut des données d'arbitrage d'abor
 B-09 (brancher Performer sur LineApp), B-11 (pousser la journée le matin).
 
 ## Arbitrages restant à Manu (bloquent la qualité des données, pas l'app)
-- **Les 3 chantiers actifs** parmi les 8 (tous `actif_chantier=false`) — l'ordre de 5
-  donné par Manu cite « onboarding », absent des 8 dictés. À clarifier.
+- **Les 3 chantiers actifs** — « onboarding » clarifié (D45 : Performer avec Nathan,
+  pas un chantier). Restent 4 candidats pour 3 slots : remodelage offre (un ou deux ?) ·
+  rapport QC (⚠️ D18) · Price Machine · offre Franchise-Affiliate-Leaders.
 - **7 internes manquants** (9 personnes seedées : Manu · Wijnand · Nathan · Edith ·
   Manuel Wing · Gonzalo · Ronald + externes Gonzague, Hervé).
 - Périmètre exact du « Caixa résolu » (D40) — avant de réécrire le bloc Caixa de COCKPIT.md.

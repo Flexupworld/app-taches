@@ -357,3 +357,12 @@ _Raison : consigné pour ne pas re-vérifier un « faux 404 » à chaque session
 _Raison : née d'une vraie erreur le jour même — « fix bob / circuly = nathan » lu comme une
 délégation alors que Manu voulait la faire AVEC Nathan. Même logique que D10 : un arbitrage
 silencieux attribue mal. S'ajoute à la table de résolution du parsing (D29/D10)._
+
+**D45 — « Onboarding » n'est pas un chantier Créer : c'est du Performer avec Nathan.**
+_(17 août 2026, Manu)_
+L'« onboarding » de l'ordre de 5 donné le 15 août = la tâche dictée « Terminer
+l'onboarding flow Flex Up EU » (ops · performer · avec Nathan). L'écart entre l'ordre
+de 5 et les 8 chantiers dictés est donc résolu.
+_Conséquence : il reste 4 candidats pour les 3 slots de chantiers actifs (D35) :
+remodelage offre (un ou deux ?) · rapport QC (⚠️ D18 : devrait sortir des mains de Manu) ·
+Price Machine · offre Franchise-Affiliate-Leaders. Le choix des 3 reste à Manu._
