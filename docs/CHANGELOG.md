@@ -3,6 +3,11 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — B-13 · Recherche par mot-clé (v0.3)
+Champ de recherche en tête d'écran : titre + `raw_capture`, toutes zones confondues,
+archive comprise. Lecture pure — ne nourrit pas la base (nuance D22 assumée).
+Arbitrée en priorité par Manu le jour même : « trop compliqué de lire toutes les cartes ».
+
 ## 17 août 2026 — F1 v2 · Écran « Ma journée » (v0.2)
 **Vérifié en direct** : health v0.2 OK, écran complet à l'accueil.
 - Trois rails à **slots fermes avec réapprovisionnement** (D39 : 1 Créer protégé ·

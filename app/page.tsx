@@ -2,7 +2,7 @@
 // porteur=moi (D19), « chez quelqu'un d'autre » (D31), « je suis bloqué » (D34).
 // Aucun champ de saisie nulle part : que des boutons (D22).
 import { APP_VERSION, CATEGORIES, SLOTS, RAILS, proposerRail, type Rail } from "@/lib/regles";
-import { chargerEcran, joursDepuis, type Tache } from "@/lib/data";
+import { chargerEcran, rechercherTaches, joursDepuis, type Tache } from "@/lib/data";
 import {
   mettreAujourdhui, refuserProposition, marquerFait, ajouterSession,
   cloturerChantier, reporterAuReservoir, sortirDesMains, demander,
@@ -100,9 +100,11 @@ function ChoixPersonne({
 export default async function Page({
   searchParams,
 }: {
-  searchParams: { refus?: string };
+  searchParams: { refus?: string; q?: string };
 }) {
   const d = await chargerEcran();
+  const q = (searchParams.q ?? "").trim();
+  const resultats = q ? await rechercherTaches(q) : [];
   const jour = new Date().toLocaleDateString("fr-FR", {
     weekday: "long", day: "numeric", month: "long",
   });
@@ -134,6 +136,55 @@ export default async function Page({
         </div>
         <a href="/api/health" style={{ ...S.meta, textDecoration: "none" }}>santé</a>
       </header>
+
+      {/* B-13 — recherche : lit la base, ne la nourrit pas (D22 sauve). */}
+      <form method="GET" style={{ ...S.rangee, marginTop: "1rem" }}>
+        <input
+          type="search"
+          name="q"
+          defaultValue={q}
+          placeholder="Chercher un mot… (toutes zones, archive comprise)"
+          style={{
+            ...S.bouton,
+            width: "min(420px, 100%)",
+            cursor: "text",
+          }}
+        />
+        <button style={S.bouton}>Chercher</button>
+        {q && (
+          <a href="/" style={{ ...S.bouton, textDecoration: "none" }}>Effacer</a>
+        )}
+      </form>
+
+      {q && (
+        <section style={S.section}>
+          <h2 style={S.h2}>
+            Résultats pour « {q} » <span style={S.meta}>{resultats.length}</span>
+          </h2>
+          {resultats.length === 0 && (
+            <p style={S.meta}>Rien. Ni dans les titres, ni dans les phrases dictées.</p>
+          )}
+          {resultats.map((t) => (
+            <div key={t.id} style={S.carte}>
+              <p style={S.titre}>{t.title}</p>
+              <p style={S.meta}>
+                {t.categorie} · {t.entity} · {t.plan}
+                {t.porteur !== "moi" && ` · ${t.porteur}`}
+                {(t.status === "fait" || t.status === "abandonne") && ` · ${t.status}`}
+                {t.raw_capture !== t.title && ` · « ${t.raw_capture} »`}
+              </p>
+              {t.plan === "reservoir" && t.porteur === "moi" &&
+                t.status !== "fait" && t.status !== "abandonne" && (
+                <div style={S.rangee}>
+                  <form action={mettreAujourdhui.bind(null, t.id, false)}>
+                    <button style={S.boutonVert}>Aujourd&apos;hui</button>
+                  </form>
+                </div>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
 
       {searchParams.refus && (
         <div style={{ ...S.carte, borderColor: "#9e6a03", background: "#3a2a12", marginTop: "1rem" }}>

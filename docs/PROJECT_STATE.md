@@ -1,6 +1,6 @@
 # PROJECT_STATE — App tâches (Cockpit)
 _État actuel et prochaine étape, rien d'autre. Réécrit à chaque session._
-_App version : 0.2 — **F1 « Ma journée » en ligne et vérifié le 17 août 2026.**_
+_App version : 0.3 — **F1 + recherche (B-13) en ligne, 17 août 2026.**_
 
 ## Où on en est
 **L'app est utilisable** : https://app-taches-rose.vercel.app

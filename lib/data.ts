@@ -126,6 +126,23 @@ export async function chargerEcran(): Promise<EcranData> {
   };
 }
 
+/** B-13 : recherche par mot-clé — titre et raw_capture, toutes zones confondues,
+ *  archive comprise. Lecture pure : ne nourrit rien (compatible D22). */
+export async function rechercherTaches(q: string): Promise<Tache[]> {
+  const sb = cockpitClient();
+  // Neutralise les caractères spéciaux de la syntaxe PostgREST / ilike.
+  const propre = q.replace(/[,()%_]/g, " ").trim();
+  if (!propre) return [];
+  const { data, error } = await sb
+    .from("task")
+    .select("*")
+    .or(`title.ilike.*${propre}*,raw_capture.ilike.*${propre}*`)
+    .order("created_at", { ascending: false })
+    .limit(50);
+  if (error) throw new Error(error.message);
+  return (data ?? []) as Tache[];
+}
+
 export function joursDepuis(dateISO: string): number {
   const ms = Date.now() - new Date(dateISO).getTime();
   return Math.max(0, Math.floor(ms / 86_400_000));
