@@ -115,9 +115,9 @@ git tag -f "deploiement-$(date '+%Y%m%d-%H%M')" >/dev/null 2>&1 || true
 echo
 echo "▸ Vérification de l'application en ligne…"
 sleep 5
-SANTE=$(curl -fsS --max-time 20 https://app-taches.vercel.app/api/health 2>/dev/null || echo '')
+SANTE=$(curl -fsS --max-time 20 https://app-taches-rose.vercel.app/api/health 2>/dev/null || echo '')
 if [ -z "$SANTE" ]; then
-  echo "  ⚠ /api/health n'a pas répondu. Ouvre https://app-taches.vercel.app/api/health"
+  echo "  ⚠ /api/health n'a pas répondu. Ouvre https://app-taches-rose.vercel.app/api/health"
   echo "    dans le navigateur — le déploiement peut simplement être encore en cours."
 else
   echo "$SANTE"
@@ -130,5 +130,5 @@ fi
 echo
 echo "======================================================"
 echo " Version en ligne : $COMMIT"
-echo " https://app-taches.vercel.app"
+echo " https://app-taches-rose.vercel.app"
 echo "======================================================"

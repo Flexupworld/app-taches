@@ -31,7 +31,7 @@ Mêmes valeurs que Cash Today (même projet Supabase, « Flex Up APPS »).
 Puis relance `bash deploy-app-taches.sh`.
 
 ## 4. Vérifier
-Ouvre **https://app-taches.vercel.app/api/health**
+Ouvre **https://app-taches-rose.vercel.app/api/health**
 Attendu : `schema_cockpit: "OK"` avec les comptes (`task: 101`, `people: 9`, `blocker: 3`).
 La page d'accueil doit afficher une pastille **verte** :
 « Base cockpit jointe — 101 tâches en base ».
