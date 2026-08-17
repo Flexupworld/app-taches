@@ -347,3 +347,13 @@ _(17 août 2026, constaté)_
 `app-taches.vercel.app` appartient à un tiers (« Ma Todo App ») — les sous-domaines
 vercel.app sont globaux. Script et docs pointent sur le domaine réel.
 _Raison : consigné pour ne pas re-vérifier un « faux 404 » à chaque session._
+
+**D44 — Grammaire de capture pour les personnes.** _(17 août 2026, Manu)_
+- « **avec X** » → la tâche reste chez Manu, X en `interlocuteur` (D07). Compte dans ses slots.
+- « **délégué X** » / « **pour X** » → sort de ses mains : `porteur=delegue`,
+  `delegation_log`, visible dans « Chez quelqu'un d'autre » (D31).
+- « **surveiller** » → `porteur=supervise` (le monde de Wijnand, D19). Jamais dans sa journée.
+- **Ambigu (« = X ») → Claude demande**, il n'arbitre pas en silence.
+_Raison : née d'une vraie erreur le jour même — « fix bob / circuly = nathan » lu comme une
+délégation alors que Manu voulait la faire AVEC Nathan. Même logique que D10 : un arbitrage
+silencieux attribue mal. S'ajoute à la table de résolution du parsing (D29/D10)._
