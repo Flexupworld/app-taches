@@ -3,6 +3,13 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Manuel embarqué (v0.4)
+Bouton « Manuel » en tête d'écran → `/aide`. Décrit la version en ligne : les trois
+rails, les slots fermes, les propositions et le taux de contestation, sortir de mes
+mains, je suis bloqué, la recherche, et la grammaire de dictée (D44).
+**Règle d'entretien (méthode) : le manuel se met à jour dans le même mouvement que
+chaque livraison — s'il diverge de l'écran, c'est un bug.**
+
 ## 17 août 2026 — B-13 · Recherche par mot-clé (v0.3)
 Champ de recherche en tête d'écran : titre + `raw_capture`, toutes zones confondues,
 archive comprise. Lecture pure — ne nourrit pas la base (nuance D22 assumée).

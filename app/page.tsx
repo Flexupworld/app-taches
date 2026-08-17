@@ -134,7 +134,10 @@ export default async function Page({
           <h1 style={{ fontSize: "1.5rem", margin: 0 }}>Ma journée</h1>
           <p style={{ ...S.meta, textTransform: "capitalize" }}>{jour} · v{APP_VERSION}</p>
         </div>
-        <a href="/api/health" style={{ ...S.meta, textDecoration: "none" }}>santé</a>
+        <div style={{ display: "flex", gap: "0.8rem" }}>
+          <a href="/aide" style={{ ...S.bouton, textDecoration: "none" }}>Manuel</a>
+          <a href="/api/health" style={{ ...S.meta, textDecoration: "none", alignSelf: "center" }}>santé</a>
+        </div>
       </header>
 
       {/* B-13 — recherche : lit la base, ne la nourrit pas (D22 sauve). */}
