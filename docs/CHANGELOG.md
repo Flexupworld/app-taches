@@ -3,6 +3,13 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Correctif : dictées invisibles à l'écran (v0.5)
+Bug trouvé par Manu à l'usage : une tâche dictée (« onboarding flow Flex Up EU »)
+était en base mais invisible — réservoir ET recherche. Cause : le Data Cache de
+Next.js ne rafraîchissait les lectures qu'après un geste dans l'app, jamais sur les
+écritures venues de l'extérieur (dictée via Claude). Correctif : `no-store` sur
+toutes les lectures Supabase, dans `cockpitClient()` (D46).
+
 ## 17 août 2026 — Manuel embarqué + sélecteur de rail (v0.4)
 Bouton « Manuel » en tête d'écran → `/aide`. Décrit la version en ligne : les trois
 rails, les slots fermes, les propositions et le taux de contestation, sortir de mes

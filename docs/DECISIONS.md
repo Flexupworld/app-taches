@@ -366,3 +366,14 @@ de 5 et les 8 chantiers dictés est donc résolu.
 _Conséquence : il reste 4 candidats pour les 3 slots de chantiers actifs (D35) :
 remodelage offre (un ou deux ?) · rapport QC (⚠️ D18 : devrait sortir des mains de Manu) ·
 Price Machine · offre Franchise-Affiliate-Leaders. Le choix des 3 reste à Manu._
+
+**D46 — Les lectures Supabase ne sont jamais mises en cache (`no-store`).**
+_(17 août 2026, Claude — bug réel)_
+Le Data Cache de Next.js ne se rafraîchissait qu'aux gestes faits DANS l'app
+(`revalidatePath`). Or l'app est nourrie par dictée : les écritures arrivent de
+l'extérieur (Claude / Dispatch). Une tâche dictée est restée 30 min en base sans
+jamais apparaître à l'écran ni dans la recherche.
+_Raison : pour une app dont la source d'alimentation est externe, toute mise en
+cache des lectures est un mensonge d'écran. Garde-fou méthode : une valeur affichée
+doit être la valeur vraie. Le correctif vit dans `cockpitClient()` — chemin unique
+de toutes les lectures._
