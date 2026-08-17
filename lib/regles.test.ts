@@ -28,16 +28,17 @@ test("D06 — moteur découle de la catégorie, pas d'un champ", () => {
   assert.equal(isCommercial("perso"), false);
 });
 
-test("D39 — départ : 1 Créer, 2 Performer, 2 Mécanique", () => {
-  assert.deepEqual(SLOTS, { creer: 1, performer: 2, mecanique: 2 });
+test("D48 — slots calés à l'usage : 2 Créer, 2 Performer, 3 Mécanique", () => {
+  assert.deepEqual(SLOTS, { creer: 2, performer: 2, mecanique: 3 });
 });
 
 test("D39 — un rail plein refuse, un rail libéré accepte (réapprovisionnement)", () => {
-  assert.equal(peutAjouterAuJour("creer", 0), true);
-  assert.equal(peutAjouterAuJour("creer", 1), false); // refus ferme, pas une alerte
+  assert.equal(peutAjouterAuJour("creer", 1), true);
+  assert.equal(peutAjouterAuJour("creer", 2), false); // refus ferme, pas une alerte
   assert.equal(peutAjouterAuJour("performer", 2), false);
   assert.equal(peutAjouterAuJour("performer", 1), true); // slot libéré → candidat possible
-  assert.equal(peutAjouterAuJour("mecanique", 2), false);
+  assert.equal(peutAjouterAuJour("mecanique", 3), false);
+  assert.equal(peutAjouterAuJour("mecanique", 2), true);
 });
 
 test("D30/D39 — le slot Créer est protégé contre Performer et Mécanique", () => {

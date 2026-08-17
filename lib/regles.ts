@@ -4,7 +4,7 @@
 // APP_VERSION est ici et nulle part ailleurs.
 // ============================================================================
 
-export const APP_VERSION = "0.9";
+export const APP_VERSION = "0.10";
 
 // ─── Catégories (D03) ───────────────────────────────────────────────────────
 export const CATEGORIES = [
@@ -34,11 +34,12 @@ export type Rail = (typeof RAILS)[number];
 // La journée a un nombre fixe de slots. L'app REFUSE d'en ajouter un de plus
 // et demande ce qui sort. Une action terminée / déléguée / abandonnée libère
 // son slot. Le slot Créer est protégé : jamais pris par Performer ou Mécanique.
-// Nombre à caler à l'usage ; départ validé par Manu le 16 août 2026.
+// Nombre calé à l'usage (D48, 17 août 2026) : 2 Créer · 2 Performer · 3 Mécanique.
+// Départ initial : 1/2/2 (D39). Le miroir hebdo dira si les 2 Créer avancent vraiment.
 export const SLOTS: Record<Rail, number> = {
-  creer: 1,
+  creer: 2,
   performer: 2,
-  mecanique: 2,
+  mecanique: 3,
 };
 
 /** D39 : un ajout dans un rail plein est refusé — pas d'exception, pas de

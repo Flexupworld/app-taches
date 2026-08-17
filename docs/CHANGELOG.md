@@ -3,6 +3,11 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Slots calés à l'usage : 2 Créer · 2 Performer · 3 Mécanique (v0.10)
+Décision Manu au premier jour d'usage (D48). Le principe ferme (D39) tient, les
+nombres bougent. Réserve consignée : le Créer unique était le cœur protecteur de
+D30 — le miroir hebdo tranchera si les deux chantiers avancent vraiment.
+
 ## 17 août 2026 — Éditer et supprimer les cartes (v0.9)
 ✎ corrige le titre (la phrase dictée reste intangible et visible) · ✕ abandonne la
 carte (soft — la ligne reste en base, le slot se libère). Sur les cartes du jour et

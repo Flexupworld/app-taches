@@ -386,3 +386,12 @@ uniquement ; `raw_capture` est intangible (D08) et reste affichée à côté.
 _Raison : l'archive est l'historique des arbitrages de Manu (D21) — une suppression
 dure le falsifierait. L'édition du titre est une correction du travail de Claude,
 pas une saisie : la nuance D22 est la même que pour la recherche (B-13)._
+
+**D48 — Slots calés à l'usage : 2 Créer · 2 Performer · 3 Mécanique. Ajuste D39/D30.**
+_(17 août 2026, Manu — premier jour d'usage réel)_
+Le principe des slots fermes (D39) tient ; seuls les nombres bougent.
+⚠️ _Réserve consignée par Claude : le Créer unique était le cœur protecteur de D30
+(« un seul par jour, protégé ») — la ressource rare est l'attention. Manu tranche à 2 ;
+le miroir hebdo (D32) vérifiera dans deux semaines si les deux chantiers avancent
+réellement ou si l'un dort. Même vigilance sur Mécanique 3 : ce rail est « à réduire »,
+pas à agrandir — si les 3 slots sont pleins chaque jour, on en reparle._
