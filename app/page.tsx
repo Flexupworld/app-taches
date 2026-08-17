@@ -8,6 +8,7 @@ import {
   cloturerChantier, reporterAuReservoir, sortirDesMains, demander,
   cloreDelegation, resoudreBlocage, changerRailVers,
   monterDunCran, mettreEnTete, changerCategorie, reprendreEnMain,
+  supprimerTache, renommerTache,
 } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -86,6 +87,43 @@ function ChipRail({ t }: { t: Tache }) {
         );
       })}
     </span>
+  );
+}
+
+function EditerSupprimer({ t }: { t: Tache }) {
+  return (
+    <>
+      <details style={{ display: "inline-block" }}>
+        <summary
+          style={{ ...S.bouton, listStyle: "none", display: "inline-block" }}
+          title="Corriger le titre (ta phrase dictée d'origine est conservée)"
+        >
+          ✎
+        </summary>
+        <form
+          action={renommerTache.bind(null, t.id)}
+          style={{ ...S.rangee, marginTop: "0.4rem" }}
+        >
+          <input
+            name="title"
+            defaultValue={t.title}
+            style={{ ...S.bouton, cursor: "text", width: "min(340px, 100%)" }}
+          />
+          <button style={S.boutonVert}>OK</button>
+        </form>
+        {t.raw_capture !== t.title && (
+          <p style={{ ...S.meta, marginTop: "0.3rem" }}>Dicté : « {t.raw_capture} »</p>
+        )}
+      </details>
+      <form action={supprimerTache.bind(null, t.id)} style={{ display: "inline" }}>
+        <button
+          style={{ ...S.bouton, color: "#f85149" }}
+          title="Abandonner — la carte disparaît et libère son slot ; la ligne reste en base"
+        >
+          ✕
+        </button>
+      </form>
+    </>
   );
 }
 
@@ -288,6 +326,7 @@ export default async function Page({
                   </div>
                   <div style={S.rangee}>
                     <ChipRail t={t} />
+                    <EditerSupprimer t={t} />
                   </div>
                 </div>
               ))}
@@ -408,6 +447,7 @@ export default async function Page({
                   <div style={S.rangee}>
                     <ChoixCategorie t={t} />
                     <ChoixPersonne taskId={t.id} personnes={d.personnes} />
+                    <EditerSupprimer t={t} />
                   </div>
                 </div>
               ))}

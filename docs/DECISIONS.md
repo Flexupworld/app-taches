@@ -377,3 +377,12 @@ _Raison : pour une app dont la source d'alimentation est externe, toute mise en
 cache des lectures est un mensonge d'écran. Garde-fou méthode : une valeur affichée
 doit être la valeur vraie. Le correctif vit dans `cockpitClient()` — chemin unique
 de toutes les lectures._
+
+**D47 — Supprimer = abandonner (soft) ; éditer = corriger le titre, jamais la dictée.**
+_(17 août 2026, Manu — « je voudrais pouvoir éditer et supprimer les cartes »)_
+✕ passe la tâche en `status = abandonne` : elle disparaît de l'écran et libère son
+slot, mais la ligne reste en base. **Aucune suppression dure.** ✎ modifie `title`
+uniquement ; `raw_capture` est intangible (D08) et reste affichée à côté.
+_Raison : l'archive est l'historique des arbitrages de Manu (D21) — une suppression
+dure le falsifierait. L'édition du titre est une correction du travail de Claude,
+pas une saisie : la nuance D22 est la même que pour la recherche (B-13)._

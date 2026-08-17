@@ -269,6 +269,31 @@ export async function changerCategorie(taskId: string, categorie: Categorie) {
   revalidatePath("/");
 }
 
+/** D47 : supprimer = abandonner. Soft, jamais de suppression dure — la ligne et
+ *  la phrase dictée restent en base, la carte disparaît et libère son slot. */
+export async function supprimerTache(taskId: string) {
+  const sb = cockpitClient();
+  const { error } = await sb
+    .from("task")
+    .update({ status: "abandonne", done_at: new Date().toISOString() })
+    .eq("id", taskId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/");
+}
+
+/** D47 : éditer = corriger le titre écrit par Claude. raw_capture intangible (D08). */
+export async function renommerTache(taskId: string, formData: FormData) {
+  const titre = String(formData.get("title") ?? "").trim();
+  if (!titre) return;
+  const sb = cockpitClient();
+  const { error } = await sb
+    .from("task")
+    .update({ title: titre })
+    .eq("id", taskId);
+  if (error) throw new Error(error.message);
+  revalidatePath("/");
+}
+
 /** D19 : reprendre en main une tâche déléguée / supervisée. */
 export async function reprendreEnMain(taskId: string) {
   const sb = cockpitClient();

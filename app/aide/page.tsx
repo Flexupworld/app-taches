@@ -125,6 +125,15 @@ export default function Aide() {
         arrive : <strong>« Débloqué »</strong>.
       </p>
 
+      <h2 style={S.h2}>Corriger et abandonner</h2>
+      <p style={S.p}>
+        <strong>✎</strong> corrige le titre que Claude a écrit — ta phrase dictée
+        d&apos;origine reste conservée telle quelle, toujours visible sous le champ.
+        <strong> ✕</strong> abandonne la carte : elle disparaît de partout et libère
+        son slot, mais la ligne reste en base — rien ne s&apos;efface jamais,
+        l&apos;historique ne ment pas.
+      </p>
+
       <h2 style={S.h2}>Délégué &amp; supervisé — où sont les autres tâches</h2>
       <p style={S.p}>
         Ta journée et ton réservoir ne montrent que ce qui est à toi. Le reste du

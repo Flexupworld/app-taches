@@ -3,6 +3,11 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Éditer et supprimer les cartes (v0.9)
+✎ corrige le titre (la phrase dictée reste intangible et visible) · ✕ abandonne la
+carte (soft — la ligne reste en base, le slot se libère). Sur les cartes du jour et
+du réservoir. Décision D47 : aucune suppression dure, jamais.
+
 ## 17 août 2026 — Les 104 tâches sont visibles (v0.8)
 Retour de Manu : « je ne comprends pas où sont les 104 tâches ».
 - **Réservoir : les 9 catégories toujours listées** avec leur compte (vides estompées) —
