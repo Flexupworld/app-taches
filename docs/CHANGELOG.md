@@ -3,6 +3,15 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — Les 104 tâches sont visibles (v0.8)
+Retour de Manu : « je ne comprends pas où sont les 104 tâches ».
+- **Réservoir : les 9 catégories toujours listées** avec leur compte (vides estompées) —
+  plus de catégorie qui disparaît quand elle se vide.
+- **« Réservoir : x → »** : bouger une carte d'une catégorie à une autre (D16).
+- **Nouvelle zone « Délégué & supervisé »** (78 tâches) : consultable, jamais imposée —
+  la moitié manquante de D19 existait en base mais nulle part à l'écran. Bouton
+  « Reprendre en main ».
+
 ## 17 août 2026 — La journée se réorganise (v0.7)
 Sur les cartes du jour : ↑ (ordre dans le rail) et les trois tags de rail pour
 basculer Performer ↔ Mécanique ↔ Créer. **La bascule vers un rail plein est refusée

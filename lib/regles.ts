@@ -4,7 +4,7 @@
 // APP_VERSION est ici et nulle part ailleurs.
 // ============================================================================
 
-export const APP_VERSION = "0.7";
+export const APP_VERSION = "0.8";
 
 // ─── Catégories (D03) ───────────────────────────────────────────────────────
 export const CATEGORIES = [

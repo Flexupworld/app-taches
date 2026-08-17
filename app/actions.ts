@@ -5,7 +5,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cockpitClient } from "@/lib/supabase";
-import { peutAjouterAuJour, proposerRail, RAILS, type Rail } from "@/lib/regles";
+import {
+  peutAjouterAuJour, proposerRail, RAILS, CATEGORIES,
+  type Rail, type Categorie,
+} from "@/lib/regles";
 
 async function consigner(
   taskId: string | null,
@@ -241,6 +244,45 @@ export async function mettreEnTete(taskId: string) {
   const { error: e1 } = await sb.from("task").update({ rang: 0 }).eq("id", taskId);
   if (e1) throw new Error(e1.message);
   await renumeroter(colonne);
+  revalidatePath("/");
+}
+
+/** Bouger une carte d'un réservoir à un autre (D16 : Manu reclasse d'un geste). */
+export async function changerCategorie(taskId: string, categorie: Categorie) {
+  if (!CATEGORIES.includes(categorie)) throw new Error(`Catégorie inconnue : ${categorie}`);
+  const sb = cockpitClient();
+  const { data: t, error } = await sb
+    .from("task")
+    .select("categorie, plan, rail")
+    .eq("id", taskId)
+    .single();
+  if (error) throw new Error(error.message);
+  if (t.categorie === categorie) return;
+  const ancienne = colonneDe(t as { plan: string; categorie: string; rail: string | null });
+  const { error: e2 } = await sb
+    .from("task")
+    .update({ categorie, rang: null })
+    .eq("id", taskId);
+  if (e2) throw new Error(e2.message);
+  await renumeroter(ancienne);
+  await renumeroter({ plan: t.plan, categorie });
+  revalidatePath("/");
+}
+
+/** D19 : reprendre en main une tâche déléguée / supervisée. */
+export async function reprendreEnMain(taskId: string) {
+  const sb = cockpitClient();
+  const { error } = await sb
+    .from("task")
+    .update({ porteur: "moi", plan: "reservoir" })
+    .eq("id", taskId);
+  if (error) throw new Error(error.message);
+  const { error: e2 } = await sb
+    .from("delegation_log")
+    .update({ clos: true })
+    .eq("task_id", taskId)
+    .eq("clos", false);
+  if (e2) throw new Error(e2.message);
   revalidatePath("/");
 }
 

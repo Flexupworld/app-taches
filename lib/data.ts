@@ -55,6 +55,7 @@ export type Delegation = {
 export type EcranData = {
   aujourdhui: Tache[];
   reservoir: Tache[];
+  autres: Tache[]; // D19 : délégué & supervisé — consultable, jamais imposé
   sessionsParTache: Record<string, number>;
   blocages: Blocage[];
   delegations: Delegation[];
@@ -113,6 +114,10 @@ export async function chargerEcran(): Promise<EcranData> {
     ),
     reservoir: toutes.filter(
       (t) => t.plan === "reservoir" && t.porteur === "moi" &&
+        t.status !== "fait" && t.status !== "abandonne"
+    ),
+    autres: toutes.filter(
+      (t) => t.porteur !== "moi" &&
         t.status !== "fait" && t.status !== "abandonne"
     ),
     sessionsParTache,

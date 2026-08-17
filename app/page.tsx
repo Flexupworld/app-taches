@@ -7,7 +7,7 @@ import {
   mettreAujourdhui, refuserProposition, marquerFait, ajouterSession,
   cloturerChantier, reporterAuReservoir, sortirDesMains, demander,
   cloreDelegation, resoudreBlocage, changerRailVers,
-  monterDunCran, mettreEnTete,
+  monterDunCran, mettreEnTete, changerCategorie, reprendreEnMain,
 } from "./actions";
 
 export const dynamic = "force-dynamic";
@@ -86,6 +86,23 @@ function ChipRail({ t }: { t: Tache }) {
         );
       })}
     </span>
+  );
+}
+
+function ChoixCategorie({ t }: { t: Tache }) {
+  return (
+    <details style={{ display: "inline-block" }}>
+      <summary style={{ ...S.bouton, listStyle: "none", display: "inline-block" }}>
+        Réservoir : {t.categorie} →
+      </summary>
+      <div style={{ ...S.rangee, marginTop: "0.4rem" }}>
+        {CATEGORIES.filter((c) => c !== t.categorie).map((c) => (
+          <form key={c} action={changerCategorie.bind(null, t.id, c)}>
+            <button style={S.bouton}>{c}</button>
+          </form>
+        ))}
+      </div>
+    </details>
   );
 }
 
@@ -362,12 +379,14 @@ export default async function Page({
         </h2>
         {CATEGORIES.map((cat) => {
           const taches = d.reservoir.filter((t) => t.categorie === cat);
-          if (taches.length === 0) return null;
           return (
-            <details key={cat} open={cat === "commercial"} style={{ marginBottom: "0.8rem" }}>
-              <summary style={{ ...S.h2, cursor: "pointer", display: "list-item" }}>
+            <details key={cat} style={{ marginBottom: "0.5rem", opacity: taches.length === 0 ? 0.45 : 1 }}>
+              <summary style={{ ...S.h2, cursor: "pointer", display: "list-item", marginTop: 0 }}>
                 {cat} <span style={S.meta}>{taches.length}</span>
               </summary>
+              {taches.length === 0 && (
+                <p style={{ ...S.meta, fontStyle: "italic" }}>Vide.</p>
+              )}
               {taches.map((t) => (
                 <div key={t.id} style={S.carte}>
                   <p style={S.titre}>
@@ -385,7 +404,43 @@ export default async function Page({
                       <button style={S.bouton} title="Passer devant la précédente">↑</button>
                     </form>
                     <ChipRail t={t} />
+                  </div>
+                  <div style={S.rangee}>
+                    <ChoixCategorie t={t} />
                     <ChoixPersonne taskId={t.id} personnes={d.personnes} />
+                  </div>
+                </div>
+              ))}
+            </details>
+          );
+        })}
+      </section>
+
+      {/* ─── Délégué & supervisé (D19 : consultable, jamais imposé) ─── */}
+      <section style={S.section}>
+        <h2 style={S.h2}>
+          Délégué &amp; supervisé <span style={S.meta}>{d.autres.length} · consultable, jamais imposé</span>
+        </h2>
+        {(["supervise", "delegue"] as const).map((p) => {
+          const taches = d.autres.filter((t) => t.porteur === p);
+          if (taches.length === 0) return null;
+          return (
+            <details key={p} style={{ marginBottom: "0.5rem" }}>
+              <summary style={{ ...S.h2, cursor: "pointer", display: "list-item", marginTop: 0 }}>
+                {p === "supervise" ? "Supervisé (le monde de Wijnand)" : "Délégué aux responsables"}{" "}
+                <span style={S.meta}>{taches.length}</span>
+              </summary>
+              {taches.map((t) => (
+                <div key={t.id} style={{ ...S.carte, opacity: 0.85 }}>
+                  <p style={S.titre}>{t.title}</p>
+                  <p style={S.meta}>
+                    {t.categorie} · {t.entity}
+                    {t.responsable && ` · ${nomPar(t.responsable)}`}
+                  </p>
+                  <div style={S.rangee}>
+                    <form action={reprendreEnMain.bind(null, t.id)}>
+                      <button style={S.bouton}>Reprendre en main</button>
+                    </form>
                   </div>
                 </div>
               ))}

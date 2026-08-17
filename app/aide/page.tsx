@@ -101,7 +101,9 @@ export default function Aide() {
         L&apos;ordre : <strong>⇈</strong> met la tâche en tête de sa colonne,
         <strong> ↑</strong> la fait passer devant la précédente. Pas de note, pas de
         score — tu fais passer une tâche devant une autre, rien d&apos;autre.
-        « ★ » marque un chantier actif.
+        « <strong>Réservoir : x →</strong> » déplace la carte vers une autre catégorie.
+        Les neuf catégories sont toujours listées, avec leur compte — les vides sont
+        estompées. « ★ » marque un chantier actif.
       </p>
 
       <h2 style={S.h2}>Sortir de mes mains</h2>
@@ -121,6 +123,15 @@ export default function Aide() {
         pourquoi ça bloque, ce que ça débloque, l&apos;ancienneté. Le contexte est
         rédigé par Claude depuis vos conversations — jamais saisi. Quand la réponse
         arrive : <strong>« Débloqué »</strong>.
+      </p>
+
+      <h2 style={S.h2}>Délégué &amp; supervisé — où sont les autres tâches</h2>
+      <p style={S.p}>
+        Ta journée et ton réservoir ne montrent que ce qui est à toi. Le reste du
+        groupe — supervisé par Wijnand (finance, marketing) ou délégué aux
+        responsables — vit dans la zone « Délégué &amp; supervisé », repliée en bas :
+        consultable quand tu veux, jamais imposée. « Reprendre en main » ramène une
+        tâche dans ton réservoir.
       </p>
 
       <h2 style={S.h2}>Chercher</h2>
