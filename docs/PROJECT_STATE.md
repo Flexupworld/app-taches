@@ -1,11 +1,18 @@
 # PROJECT_STATE — App tâches (Cockpit)
 _État actuel et prochaine étape, rien d'autre. Réécrit à chaque session._
-_App version : 0.3 — **F1 + recherche (B-13) en ligne, 17 août 2026.**_
+_App version : 0.7 — **7 versions livrées et vérifiées le 17 août 2026.**_
 
 ## Où on en est
-**L'app est utilisable** : https://app-taches-rose.vercel.app
-F0 (squelette) et F1 (écran complet) livrés le même jour. 43 décisions (D01–D43),
-8 tests verts, GitHub `Flexupworld/app-taches` à jour. Détail des livraisons : `CHANGELOG.md`.
+**L'app est utilisable et Manu l'utilise** : https://app-taches-rose.vercel.app
+F0 → v0.7 en une journée : écran complet, recherche, manuel embarqué, sélecteur de
+rail, ordre des cartes (⇈/↑), réorganisation de la journée, et le correctif D46
+(dictées invisibles — cache). 46 décisions (D01–D46), 8 tests verts, GitHub à jour.
+Premiers gestes réels : Caixa débloqué (test D40 ✓), journée composée, 10 arbitrages
+journalisés, 2 refus de proposition — **le taux de contestation vit**.
+⚠️ Verdict de Manu en fin de session : « pas encore satisfaisant pour que je commence
+à l'utiliser » — la liste des manques n'a pas encore été dictée. C'est LA question
+d'ouverture de la prochaine session.
+Détail des livraisons : `CHANGELOG.md`.
 
 **Les trois règles qui gouvernent tout :**
 - **D22** — Claude écrit, Manu corrige. Aucun formulaire.
