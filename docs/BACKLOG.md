@@ -54,6 +54,16 @@ chantiers ressemblent à une liste alors que c'est une chaîne.
 Combien de jours sans capture avant que l'app se signale ? Et par quel canal —
 dans l'app, ou remonté par Claude au brief du Cockpit ?
 
+## B-13 · Moteur de recherche par mot _(demandé par Manu le 17 août 2026)_
+Retrouver une tâche par mot-clé (titre, `raw_capture`), toutes zones confondues —
+réservoir, archive, délégué, bloqué.
+_Filtre Q1 : passe (retrouver ce qu'on a capturé est le cœur de l'app). Q2 : passe
+(lecture pure, aucune donnée nouvelle). Nuance D22 : un champ de recherche n'est pas un
+formulaire de saisie — il ne nourrit pas la base, il la lit. Compatible._
+_Séquencement : après la preuve d'usage, et le besoin grandira avec le volume — à 101
+tâches les colonnes suffisent peut-être encore. Techniquement trivial (filtre `ilike`
+ou tsvector si besoin)._
+
 ## B-08 · Que devient COCKPIT.md une fois l'app en service ?
 Si les tâches vivent dans Supabase et que COCKPIT.md continue d'exister en parallèle,
 on a deux sources de vérité — exactement ce que la méthode interdit.
