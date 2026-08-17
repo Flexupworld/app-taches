@@ -4,7 +4,7 @@
 // APP_VERSION est ici et nulle part ailleurs.
 // ============================================================================
 
-export const APP_VERSION = "0.1";
+export const APP_VERSION = "0.2";
 
 // ─── Catégories (D03) ───────────────────────────────────────────────────────
 export const CATEGORIES = [
@@ -55,6 +55,27 @@ export function peutAjouterAuJour(
 export function railAutoriseDansSlot(slotRail: Rail, tacheRail: Rail): boolean {
   if (slotRail === "creer") return tacheRail === "creer";
   return tacheRail === slotRail;
+}
+
+// ─── Classement rail depuis le verbe (D29) ──────────────────────────────────
+// Claude propose, Manu corrige. Table unique — ne pas réimplémenter ailleurs.
+// Racines, pas des infinitifs : « relance » couvre relance/relancer, etc.
+const VERBES_MECANIQUE = [
+  "envoy", "vérif", "verif", "check", "appel", "command", "relanc", "relance",
+  "pay", "lien", "fix", "corrig", "annul", "déclar", "declar", "récup", "recup",
+];
+const VERBES_CREER = [
+  "cadrer", "concevoir", "définir", "definir", "structurer", "réfléchir",
+  "reflechir", "créer", "creer", "remodeler", "remodelage", "proposition",
+  "offre", "module", "modèle", "modele", "simulation",
+];
+
+/** D29 : proposition de rail depuis le texte. Jamais imposé — Manu corrige. */
+export function proposerRail(texte: string): Rail {
+  const t = texte.toLowerCase();
+  if (VERBES_CREER.some((v) => t.includes(v))) return "creer";
+  if (VERBES_MECANIQUE.some((v) => t.includes(v))) return "mecanique";
+  return "performer";
 }
 
 // ─── Porteur (D19) ──────────────────────────────────────────────────────────

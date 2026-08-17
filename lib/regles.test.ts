@@ -10,6 +10,7 @@ import {
   peutAjouterAuJour,
   railAutoriseDansSlot,
   visibleDansMaJournee,
+  proposerRail,
 } from "./regles.ts";
 
 test("APP_VERSION est posée", () => {
@@ -45,6 +46,15 @@ test("D30/D39 — le slot Créer est protégé contre Performer et Mécanique", 
   assert.equal(railAutoriseDansSlot("creer", "mecanique"), false);
   assert.equal(railAutoriseDansSlot("performer", "performer"), true);
   assert.equal(railAutoriseDansSlot("performer", "creer"), false);
+});
+
+test("D29 — le verbe dicté propose le rail, sans l'imposer", () => {
+  assert.equal(proposerRail("Envoyer le lien de paiement harnais"), "mecanique");
+  assert.equal(proposerRail("Vérifier les prix IGIC"), "mecanique");
+  assert.equal(proposerRail("Proposition Decathlon — tentes sur modèle Ledger"), "creer");
+  assert.equal(proposerRail("Cadrer le module retour matériel"), "creer");
+  assert.equal(proposerRail("Relance renouvellements abonnés"), "mecanique");
+  assert.equal(proposerRail("Dashboard Decathlon"), "performer"); // ni verbe créer ni mécanique
 });
 
 test("D19 — l'écran quotidien n'affiche que porteur=moi", () => {
