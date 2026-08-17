@@ -3,6 +3,21 @@ _Une entrée datée par fonctionnalité livrée. **Ajout seul.**_
 
 ---
 
+## 17 août 2026 — F1 v2 · Écran « Ma journée » (v0.2)
+**Vérifié en direct** : health v0.2 OK, écran complet à l'accueil.
+- Trois rails à **slots fermes avec réapprovisionnement** (D39 : 1 Créer protégé ·
+  2 Performer · 2 Mécanique) — l'app **refuse** d'ajouter quand c'est plein et le dit.
+- **Propositions** par slot libre, deux boutons : « Aujourd'hui » / « Non » — le Non
+  écrit `propose_refuse` et nourrit le **taux de contestation** (D32).
+- **Réservoir** filtré `porteur = moi` (D19), rail proposé depuis le verbe (D29,
+  corrigeable d'un clic), « Sortir de mes mains » → personne (D20/D24).
+- **Je suis bloqué** (D34) : contexte dépliable, bouton « Débloqué » — le cas Caixa
+  (43 j) attend son déblocage par Manu (test D40).
+- **Chez quelqu'un d'autre** (D31) : ancienneté, « Demander », « C'est fait ».
+- Chaque geste écrit dans `arbitrage` (D21/D32). Aucun champ de saisie (D22).
+- 8 tests verts (D29 ajouté). Hors périmètre, comme prévu : dictée, miroir hebdo,
+  glisser-déposer.
+
 ## 17 août 2026 — F0 · Squelette en ligne (v0.1)
 **https://app-taches-rose.vercel.app** — vérifié en direct : `/api/health` répond
 `schema_cockpit: OK` (101 tâches · 9 personnes · 3 blocages), pastille verte à l'accueil.

@@ -1,50 +1,46 @@
 # PROJECT_STATE — App tâches (Cockpit)
 _État actuel et prochaine étape, rien d'autre. Réécrit à chaque session._
-_App version : 0.1 — **F0 en ligne et vérifié le 17 août 2026.**_
+_App version : 0.2 — **F1 « Ma journée » en ligne et vérifié le 17 août 2026.**_
 
 ## Où on en est
-**F0 (squelette) est livré** : https://app-taches-rose.vercel.app
-`/api/health` → `schema_cockpit: OK` · 101 tâches · 9 personnes · 3 blocages.
-Base seedée, tests verts, 43 décisions consignées (D01–D43). Détail : `CHANGELOG.md`.
+**L'app est utilisable** : https://app-taches-rose.vercel.app
+F0 (squelette) et F1 (écran complet) livrés le même jour. 43 décisions (D01–D43),
+8 tests verts, GitHub `Flexupworld/app-taches` à jour. Détail des livraisons : `CHANGELOG.md`.
 
 **Les trois règles qui gouvernent tout :**
 - **D22** — Claude écrit, Manu corrige. Aucun formulaire.
-- **D30 + D39** — trois rails, slots fermes avec réapprovisionnement (1 Créer protégé ·
-  2 Performer · 2 Mécanique). L'app refuse d'ajouter, elle ne signale pas un dépassement.
-- **D32** — une seule mesure : le miroir hebdo + le taux de contestation.
+- **D30 + D39** — trois rails, slots fermes (1 Créer protégé · 2 Performer · 2 Mécanique).
+- **D32** — une seule mesure : miroir hebdo + taux de contestation.
 
-## Prochaine étape — F1 v2 : l'écran « Ma journée »
-Trois rails à slots fermes (D39) · réservoir filtré `porteur = moi` · « chez quelqu'un
-d'autre » (D31) · « je suis bloqué » dépliable (D34) · bouton « sortir de mes mains » (D20).
-Chaque geste écrit dans `arbitrage` (D21/D32).
-**Hors périmètre F1 :** dictée (passe par Dispatch) · miroir hebdo (F2) · glisser-déposer.
-**Fini quand :** déployé et vérifié en direct · tests verts · APP_VERSION incrémentée ·
-CHANGELOG + DECISIONS à jour · commité **et poussé**.
-**Preuve d'usage attendue :** Manu ouvre l'app spontanément une semaine, et conteste
-au moins une proposition sur cinq. Sinon on s'arrête et on regarde pourquoi.
+## Prochaine étape — LA PREUVE D'USAGE, pas une fonctionnalité
+On ne construit **rien de plus** tant que l'usage n'est pas prouvé :
+**Manu ouvre l'app spontanément une semaine durant, et conteste au moins une
+proposition sur cinq.** Sinon on s'arrête et on regarde pourquoi (c'est le pari D11,
+déjà perdu une fois avec Obsidian — D17).
+- Premier geste attendu dans l'app : **débloquer Caixa** (test D40, 43 j au compteur).
+- Capture des nouvelles tâches : via Dispatch — Manu dicte, Claude écrit en base (D22).
+  À chaque session Cockpit, Claude regarde `arbitrage` pour lire l'usage réel.
 
-## Reste à faire (hors F1)
-- Rien. GitHub : `Flexupworld/app-taches` créé et poussé le 17 août (token dans le
-  trousseau de l'iMac). Le script de déploiement pousse à chaque passage.
+Ensuite seulement : F2 (miroir hebdo — il faut des données d'arbitrage d'abord),
+B-09 (brancher Performer sur LineApp), B-11 (pousser la journée le matin).
 
-## Arbitrages restant à Manu
-- **7 internes manquants** (9 seedés : Manu · Wijnand · Nathan · Edith · Manuel Wing ·
-  Gonzalo · Ronald + externes Gonzague, Hervé).
-- **Les 3 chantiers actifs** parmi les 8 (tous `actif_chantier = false`) — l'ordre de 5
-  donné par Manu cite « onboarding », absent des 8 dictés.
-- **Périmètre exact du « Caixa résolu »** (D40) — avant de réécrire le bloc Caixa de COCKPIT.md.
-- Le rapport QC client reste chez Manu ou part chez un responsable ? (D18)
-- Les deux « remodelages » — un seul chantier ou deux ?
-- Hodgson / Ruben / Borja · Lift & Firewire (Logistique ou Commercial ?) · impayés Flex Up
-  (Finance ou Commercial ?) · les 4 dashboards (un chantier ?) · catégorie Perso (la garder ?)
+## Arbitrages restant à Manu (bloquent la qualité des données, pas l'app)
+- **Les 3 chantiers actifs** parmi les 8 (tous `actif_chantier=false`) — l'ordre de 5
+  donné par Manu cite « onboarding », absent des 8 dictés. À clarifier.
+- **7 internes manquants** (9 personnes seedées : Manu · Wijnand · Nathan · Edith ·
+  Manuel Wing · Gonzalo · Ronald + externes Gonzague, Hervé).
+- Périmètre exact du « Caixa résolu » (D40) — avant de réécrire le bloc Caixa de COCKPIT.md.
+- Rapport QC : chez Manu ou chez un responsable ? (D18) · les deux « remodelages » :
+  un ou deux chantiers ? · Hodgson/Ruben/Borja · Lift & Firewire · impayés Flex Up ·
+  les 4 dashboards · catégorie Perso.
 
 ## Vigilances
 - **D22 est le cœur.** Toute fonctionnalité qui demande une saisie à Manu doit être refusée.
-- **Caixa est volontairement OUVERT en base** (résolu dans la vraie vie) : c'est le cas de
-  test du cycle blocker → résolu (D40). Il se déblo­que dans l'app, pas en SQL.
-- Le rail Créer n'a aucun chantier actif tant que Manu n'a pas tranché — l'écran F1 doit
-  le montrer comme un état réel (slot vide), pas le masquer.
-- `raw_capture` = titre d'IMPORT-INITIAL.md ; le texte brut BOTTLE NECK d'Obsidian n'a pas
-  été récupéré (vault non monté). Backfill possible, à arbitrer.
+- **Ne pas « corriger » Caixa en SQL** — il se débloque dans l'app (D40).
+- Le slot Créer affiche « aucun chantier actif » tant que les 3 actifs ne sont pas
+  tranchés — c'est un état réel, pas un bug.
+- Si le taux de contestation reste à zéro, c'est une alerte (D32) : Manu a cessé de choisir.
+- `raw_capture` = titre d'IMPORT-INITIAL.md ; texte brut BOTTLE NECK non récupéré
+  (vault Obsidian non monté). Backfill possible, à arbitrer.
 - Monter `~/FLEX UP Dropbox/CLAUDE` au début de chaque session — le doc canonique de
   méthode y vit, hors du dossier COCKPIT, et l'étape 0 échoue sans lui.
